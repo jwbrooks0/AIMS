@@ -206,12 +206,18 @@ class LCD:
 		# Toggle backlight on-off-on
 		_GPIO.output(self.LCD_ON, flag)
 
-	def write_to_LCD(self,text=["this","is","a","test"]):
-		# Send some centred test
+	def write_to_LCD(self,text=["this","is","a","test"],justification='center'):
+		# Send some text to the screen
+                if justification=='left':
+                    j=1;
+                elif justification=='right':
+                    j=3;
+                else:
+                    j=2;
 		
-		self._lcd_string(text[0],self.LCD_LINE_1,1)
-		self._lcd_string(text[1],self.LCD_LINE_2,1)
-		self._lcd_string(text[2],self.LCD_LINE_3,1)
-		self._lcd_string(text[3],self.LCD_LINE_4,1)
+		self._lcd_string(text[0],self.LCD_LINE_1,j)
+		self._lcd_string(text[1],self.LCD_LINE_2,j)
+		self._lcd_string(text[2],self.LCD_LINE_3,j)
+		self._lcd_string(text[3],self.LCD_LINE_4,j)
 		_time.sleep(0.5) # 3 second delay
  

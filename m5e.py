@@ -141,8 +141,12 @@ class M5e:
 		"returns tag ID for first tag that responds"
 		self._TransmitCommand('\x02\x21\x03\xe8') # 03e8 in hex equals 1000 in decimal.  units in ms.  1000 ms = 1 s.  
 		(start, length, command, status, data, CRC) = self._ReceiveResponse()
-		print "ReadID = %s" % self.ReturnHexString(data[0:12])
-		return data[0:12]
+                if status == '\x04\x00':
+                    print "No tag found"
+                    return ""
+                else:
+		    print "ReadID = %s" % self.ReturnHexString(data[0:12])
+		    return data[0:12]
 
     def ReadMultiTag(self):
 		"read multiple tag IDs and places them in the tag buffer"
@@ -283,7 +287,11 @@ class M5e:
         
         # Check if return status was OK (0x0000 is success)
         if status != '\x00\x00':
-            raise M5e_CommandStatusError('Received response returned non-zero status',status)
+            # raise eror and halt code
+            #raise M5e_CommandStatusError('Received response returned non-zero status',status)
+
+            # print error but continue
+            print 'Received response returned non-zero status' + str(status)
             
         return (start, length, command, status, data, CRC)
         

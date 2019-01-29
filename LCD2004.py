@@ -1,4 +1,11 @@
 #!/usr/bin/python
+
+"""
+This library creates an instance of the LCD2004 screen attached to the Raspberry Pi.  It allows the user to turn the screen on/off and write text to the screen.  
+
+This is a modified code by John Brooks and originally from www.sunfounder.com.
+"""
+
 #--------------------------------------
 #
 #  lcd2004.py

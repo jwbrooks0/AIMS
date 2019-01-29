@@ -1,11 +1,12 @@
-##
-##  Thing Magic M5e and M5e-Compact Python Interface
-##  Originally Written by Travis Deyle [tdeyle@gatech.edu] under the tutelage of 
-##    Dr. Matt Reynolds (Duke University) and Dr. Charlie Kemp (Georgia Tech)
-##    Please remember me if you become rich and/or famous, and please  
-##    refer to our related work(s) when writing papers.  Thanks.
-##  Latest version written by John Brooks [jwbrooks0@gmail.com]
+"""
+Thing Magic M5e and M5e-Compact Python Interface
+Originally Written by Travis Deyle [tdeyle@gatech.edu] under the tutelage of 
+Dr. Matt Reynolds (Duke University) and Dr. Charlie Kemp (Georgia Tech)
+Please remember me if you become rich and/or famous, and please  
+refer to our related work(s) when writing papers.  Thanks.
 
+Latest version written by John Brooks [jwbrooks0@gmail.com]
+"""
 
 ## Import libraries
 import sys, serial, time

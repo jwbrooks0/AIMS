@@ -1,3 +1,9 @@
+"""
+This library creates an instance of a button attached to a Raspberry Pi.  The only function it can do (at present) is return its status (pressed or unpressed).  
+
+Created by John Brooks
+"""
+
 # import libraries
 import RPi.GPIO as GPIO
 

@@ -1,3 +1,4 @@
 *.pyc
 depricated
 *.swo
+*.csv#

@@ -8,24 +8,25 @@ Created on Sat Feb  2 12:51:52 2019
 import numpy as _np
 
 # initialize database and database functions
-def lookupTag(df,lcd,tagID='0xe2 0x0 0x51 0x80 0x0 0xe 0x1 0x40 0x12 0x60 0x97 0x57 '):
+def lookupTag(df,tagID='0xe2 0x0 0x51 0x80 0x0 0xe 0x1 0x40 0x12 0x60 0x97 0x57 ',lcd=None):
 	try:
 		return df.loc[tagID]['Item'],df.loc[tagID]['Location']
 	except:
-        	output=[]
-		output.append('Tag not recognized')
-		count=0
-		while(len(tagID)>0):
-			if len(tagID)>=20:
-				output.append(tagID[0:20])
-				tagID=tagID[20:]
-			else:
-				output.append(tagID[0:len(tagID)])
-				tagID=[]
-			count+=1
-			if count==3:
-				tagID=[]
-		lcd.write_to_LCD(output)
+		if type(lcd)!=type(None):
+	        	output=[]
+			output.append('Tag not recognized')
+			count=0
+			while(len(tagID)>0):
+				if len(tagID)>=20:
+					output.append(tagID[0:20])
+					tagID=tagID[20:]
+				else:
+					output.append(tagID[0:len(tagID)])
+					tagID=[]
+				count+=1
+				if count==3:
+					tagID=[]
+			lcd.write_to_LCD(output)
 		return 'NA',0
 	
 	
@@ -34,7 +35,7 @@ def investigateBox(df,reader,lcd,boxNum=1):
 	
 	tagIDs=reader.ReadMultiTag()
 	
-	if type(reader)!=type(None):
+	if type(lcd)!=type(None):
 		lcd.write_to_LCD(["Read all tags","total count: %d"%len(tagIDs),"",""],justification='left')
 		
 	print("")

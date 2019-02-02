@@ -118,11 +118,12 @@ class M5e:
 		(start, length, command, status, data, CRC) = self._ReceiveResponse()
 
 		# this next bit of code pulls out multiple tag IDs from a long list of possible IDs.
-		index=data.find('\x00\x80')
-		while index != -1:
-			newIDS.append(data[index+4:index+16])
-			data=data[(index+1):]
-			index=data.find('\x00\x80')
+#		index=data.find('\x00\x80')
+#		while index != -1:
+#			newIDS.append(data[index+4:index+16])
+#			data=data[(index+1):]
+#			index=data.find('\x00\x80')
+		newIDS=self._ReturnHexString(data)
 
 		# clear tag bugger after reading it.  
 		self._clearTagBuffer()
@@ -149,7 +150,8 @@ class M5e:
 			print("No tag found")
 			return ""
 		else:
-			print("ReadID = %s" % self._ReturnHexString(data[0:12]))
+			if self.verbosity==True:
+				print("ReadID = %s" % self._ReturnHexString(data[0:12]))
 			return self._ReturnHexString(data[0:12])
 
 

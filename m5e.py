@@ -98,7 +98,8 @@ class M5e:
 		# Returns the number of tags stored in the buffer
 		self._TransmitCommand('\x00\x29')
 		(start, length, command, status, data, CRC) = self._ReceiveResponse()
-		print("Num Tags in Buffer = %d" % ord(data[3]))
+		if self.verbosity==True:
+			print("Num Tags in Buffer = %d" % ord(data[3]))
 		return ord(data[3]) #i'm assuming here that only the last character contains a number, meaning there are less than 256 tags in the buffer
 
 
@@ -118,12 +119,14 @@ class M5e:
 		(start, length, command, status, data, CRC) = self._ReceiveResponse()
 
 		# this next bit of code pulls out multiple tag IDs from a long list of possible IDs.
-#		index=data.find('\x00\x80')
-#		while index != -1:
-#			newIDS.append(data[index+4:index+16])
-#			data=data[(index+1):]
-#			index=data.find('\x00\x80')
-		newIDS=self._ReturnHexString(data)
+		index=data.find('\x00\x80')
+		while index != -1:
+			newIDS.append(self._ReturnHexString(data[index+4:index+16]))
+			data=data[(index+1):]
+			index=data.find('\x00\x80')
+		
+#		newIDS=self._ReturnHexString(data)
+#		newIDS=data
 
 		# clear tag bugger after reading it.  
 		self._clearTagBuffer()

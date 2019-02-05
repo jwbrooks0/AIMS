@@ -36,7 +36,7 @@ while(True):
 	if b1.buttonStatus()==1 or b2.buttonStatus()==1:
 		data=reader.ReadSingleTag()
 		print(data)
-		item,loc=aimsLib.lookupTag(df,data,lcd)
+                item,loc=aimsLib.lookupTag(df,data,lcd1)
 		if item!='NA':
 			lcd1.write_to_LCD(["Read Single Tag","ID: %s" % data[-17:-1],"Item: %s"%item,"SCTB Number: %d"%loc],justification='left')
 		else:
